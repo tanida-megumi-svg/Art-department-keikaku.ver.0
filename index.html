@@ -1,0 +1,3003 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="tool">
+  <meta name="design-style" content="briefing">
+  <title>中学校美術科 3年間教科指導計画システム</title>
+  
+  <!-- Approved Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Approved Lucide Icons -->
+  <script src="https://unpkg.com/lucide@1.43.0/dist/umd/lucide.min.js"></script>
+
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Page and clean surfaces */
+      --background: #f8fafc;
+      --surface-container-low: #ffffff;
+      --surface-container: #f1f5f9;
+      --surface-container-high: #e2e8f0;
+      --card-bg: #ffffff;
+
+      /* Ink */
+      --on-surface: #0f172a;
+      --on-surface-variant: #475569;
+      --on-surface-muted: #64748b;
+
+      /* Rules & borders */
+      --outline: #0f172a;
+      --outline-variant: #cbd5e1;
+      --outline-light: #e2e8f0;
+
+      /* Accents - Sophisticated Green Palette */
+      --primary: #15803d;
+      --primary-hover: #166534;
+      --primary-active: #14532d;
+      --primary-light: #dcfce7;
+      --on-primary: #ffffff;
+      --on-primary-container: #14532d;
+      --accent: #16a34a;
+
+      /* Clear Grade Identifiers (Explicit text paired with crisp tonal badges) */
+      --g1-badge-bg: #eff6ff;
+      --g1-badge-text: #1e40af;
+      --g1-badge-border: #93c5fd;
+
+      --g2-badge-bg: #ecfdf5;
+      --g2-badge-text: #065f46;
+      --g2-badge-border: #6ee7b7;
+
+      --g3-badge-bg: #fffbeb;
+      --g3-badge-text: #92400e;
+      --g3-badge-border: #fcd34d;
+
+      /* Semantic UI */
+      --error: #b91c1c;
+      --error-bg: #fef2f2;
+      --error-border: #fca5a5;
+      --warning: #b45309;
+      --warning-bg: #fffbeb;
+      --warning-border: #fde68a;
+      --success: #15803d;
+      --success-bg: #f0fdf4;
+      --success-border: #86efac;
+
+      /* Typography */
+      --font-headline: 'Plus Jakarta Sans', 'Noto Sans JP', sans-serif;
+      --font-body: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-label: 'Geist Mono', 'Noto Sans JP', monospace;
+
+      /* Spacing Scale */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 0.75rem;
+      --space-lg: 1rem;
+      --space-xl: 1.5rem;
+      --space-2xl: 2rem;
+      --space-3xl: 2.5rem;
+
+      /* Radii */
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-full: 9999px;
+
+      /* Shadows */
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      font-family: var(--font-body);
+      background-color: var(--background);
+      color: var(--on-surface);
+      line-height: 1.55;
+      font-size: 14px;
+      overflow-x: clip;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Container */
+    .app-wrapper {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: var(--space-xl) var(--space-lg) var(--space-3xl);
+    }
+
+    /* Header Section */
+    .app-header {
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-light);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: var(--space-lg);
+    }
+
+    .header-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--space-md);
+      border-bottom: 1px solid var(--outline-light);
+      padding-bottom: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+
+    .title-group {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .school-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-family: var(--font-label);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 2px 8px;
+      border-radius: var(--radius-sm);
+      margin-bottom: var(--space-xs);
+      cursor: pointer;
+    }
+
+    .school-tag:hover {
+      opacity: 0.85;
+      text-decoration: underline;
+    }
+
+    .app-title {
+      font-family: var(--font-headline);
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--on-surface);
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .app-title-edit {
+      cursor: pointer;
+      border-bottom: 1px dashed var(--outline-variant);
+    }
+
+    .app-title-edit:hover {
+      color: var(--primary);
+    }
+
+    .plan-meta {
+      font-size: 13px;
+      color: var(--on-surface-variant);
+      margin-top: 4px;
+    }
+
+    .grade-themes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-md);
+      margin-top: var(--space-md);
+    }
+
+    .theme-box {
+      background: var(--background);
+      border: 1px solid var(--outline-light);
+      border-radius: var(--radius-md);
+      padding: var(--space-sm) var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      cursor: pointer;
+      transition: border-color 0.15s, background-color 0.15s;
+    }
+
+    .theme-box:hover {
+      border-color: var(--primary);
+      background: #ffffff;
+    }
+
+    .theme-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--on-surface-variant);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .theme-text {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--on-surface);
+    }
+
+    /* Verification & KPI Dashboard Strip */
+    .dashboard-panel {
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-light);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: var(--space-lg);
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+
+    .kpi-card {
+      background: var(--background);
+      border: 1px solid var(--outline-light);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: var(--space-xs);
+    }
+
+    .kpi-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .kpi-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--on-surface-variant);
+    }
+
+    .kpi-value-row {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .kpi-value {
+      font-family: var(--font-label);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--on-surface);
+      line-height: 1;
+    }
+
+    .kpi-target {
+      font-size: 12px;
+      color: var(--on-surface-muted);
+    }
+
+    .progress-bar-bg {
+      height: 6px;
+      background: var(--surface-container-high);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      margin-top: 4px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: var(--radius-full);
+      transition: width 0.3s ease;
+    }
+
+    .progress-bar-fill.warning {
+      background: var(--warning);
+    }
+
+    .progress-bar-fill.overflow {
+      background: #2563eb;
+    }
+
+    /* Guideline Verification Alerts Row */
+    .verification-strip {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+      padding-top: var(--space-md);
+      border-top: 1px dashed var(--outline-light);
+      font-size: 12px;
+    }
+
+    .verification-strip-title {
+      font-weight: 700;
+      color: var(--on-surface);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-right: var(--space-xs);
+    }
+
+    .alert-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
+      font-size: 11.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+
+    .alert-chip:hover {
+      transform: translateY(-1px);
+    }
+
+    .alert-chip.ok {
+      background: var(--success-bg);
+      color: var(--success);
+      border: 1px solid var(--success-border);
+    }
+
+    .alert-chip.warn {
+      background: var(--warning-bg);
+      color: var(--warning);
+      border: 1px solid var(--warning-border);
+    }
+
+    .alert-chip.error {
+      background: var(--error-bg);
+      color: var(--error);
+      border: 1px solid var(--error-border);
+    }
+
+    /* Toolbar Section (Clean Sticky with No Layout Overlap) */
+    .toolbar-wrapper {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(248, 250, 252, 0.95);
+      backdrop-filter: blur(8px);
+      padding: var(--space-sm) 0 var(--space-md);
+      margin-bottom: var(--space-lg);
+      border-bottom: 1px solid var(--outline-light);
+    }
+
+    .toolbar-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .toolbar-left, .toolbar-right {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    /* Button Styles - Green-themed and High Precision */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 7px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: background-color 0.15s, border-color 0.15s, transform 0.1s, box-shadow 0.15s;
+      white-space: nowrap;
+      text-decoration: none;
+      border: 1px solid transparent;
+      user-select: none;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+      box-shadow: 0 1px 2px rgba(21, 128, 61, 0.2);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      border-color: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background: var(--surface-container-low);
+      color: var(--on-surface);
+      border-color: var(--outline-variant);
+    }
+
+    .btn-secondary:hover {
+      background: var(--surface-container);
+      border-color: var(--outline);
+    }
+
+    /* Dedicated Clear-All Button */
+    .btn-clear-all {
+      background: #ffffff;
+      color: var(--error);
+      border: 1px solid var(--error-border);
+      font-weight: 600;
+    }
+
+    .btn-clear-all:hover {
+      background: var(--error-bg);
+      border-color: var(--error);
+      box-shadow: 0 1px 3px rgba(185, 28, 28, 0.15);
+    }
+
+    .btn-icon-only {
+      padding: 7px 10px;
+    }
+
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    /* View Switcher Tabs */
+    .view-tabs {
+      display: flex;
+      background: var(--surface-container);
+      padding: 3px;
+      border-radius: var(--radius-md);
+      gap: 3px;
+      border: 1px solid var(--outline-light);
+    }
+
+    .view-tab-btn {
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      border: none;
+      background: transparent;
+      color: var(--on-surface-variant);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background-color 0.15s, color 0.15s, box-shadow 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .view-tab-btn.active {
+      background: #ffffff;
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Timeline Container & Grid Structure */
+    .timeline-container {
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-light);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      margin-top: var(--space-md);
+      /* Guarantee top padding so 4月 is never clipped or covered */
+      padding-top: var(--space-xs);
+    }
+
+    /* Column Headers Bar */
+    .timeline-header-row {
+      display: grid;
+      background: var(--surface-container);
+      border-bottom: 2px solid var(--outline-variant);
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--on-surface);
+      position: sticky;
+      top: 54px;
+      z-index: 30;
+    }
+
+    /* Grid layout configurations based on current view */
+    .layout-all .timeline-header-row,
+    .layout-all .timeline-month-row {
+      grid-template-columns: 140px 180px repeat(3, minmax(0, 1fr));
+    }
+
+    .layout-g1 .timeline-header-row,
+    .layout-g1 .timeline-month-row {
+      grid-template-columns: 140px 220px minmax(0, 1fr);
+    }
+
+    .layout-g23 .timeline-header-row,
+    .layout-g23 .timeline-month-row {
+      grid-template-columns: 140px 200px minmax(0, 1fr) minmax(0, 1fr);
+    }
+
+    .header-cell {
+      padding: var(--space-md);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-right: 1px solid var(--outline-light);
+    }
+
+    .header-cell:last-child {
+      border-right: none;
+    }
+
+    .header-grade-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .badge-g1 {
+      background: var(--g1-badge-bg);
+      color: var(--g1-badge-text);
+      border: 1px solid var(--g1-badge-border);
+    }
+
+    .badge-g2 {
+      background: var(--g2-badge-bg);
+      color: var(--g2-badge-text);
+      border: 1px solid var(--g2-badge-border);
+    }
+
+    .badge-g3 {
+      background: var(--g3-badge-bg);
+      color: var(--g3-badge-text);
+      border: 1px solid var(--g3-badge-border);
+    }
+
+    /* Monthly Row in Vertical Timeline */
+    .timeline-month-row {
+      display: grid;
+      border-bottom: 1px solid var(--outline-light);
+      min-height: 96px;
+      transition: background-color 0.15s;
+    }
+
+    .timeline-month-row:nth-child(even) {
+      background-color: #fafbfc;
+    }
+
+    .timeline-month-row:hover {
+      background-color: #f1f8f3;
+    }
+
+    /* Month Label Column */
+    .month-cell {
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-right: 1px solid var(--outline-light);
+      background: #fdfefe;
+      user-select: none;
+    }
+
+    .month-badge {
+      font-family: var(--font-label);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--on-surface);
+      background: var(--surface-container);
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--outline-variant);
+      display: inline-block;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .month-badge.q-start {
+      background: var(--primary-light);
+      color: var(--primary-hover);
+      border-color: var(--accent);
+    }
+
+    .month-subtext {
+      font-size: 11px;
+      color: var(--on-surface-muted);
+      margin-top: 4px;
+    }
+
+    /* Events Column */
+    .events-cell {
+      padding: var(--space-sm) var(--space-md);
+      border-right: 1px solid var(--outline-light);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      justify-content: center;
+      background: rgba(248, 250, 252, 0.6);
+    }
+
+    .events-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--on-surface-muted);
+      font-weight: 600;
+    }
+
+    .event-chip {
+      background: #ffffff;
+      border: 1px solid var(--outline-variant);
+      border-left: 3px solid #6366f1;
+      padding: 3px 6px;
+      border-radius: 3px;
+      font-size: 11.5px;
+      color: var(--on-surface);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .event-chip:hover {
+      background: #f8fafc;
+      border-color: #6366f1;
+    }
+
+    .event-chip.exam {
+      border-left-color: #ef4444;
+    }
+
+    .event-chip.exhibit {
+      border-left-color: #10b981;
+    }
+
+    .btn-add-event-mini {
+      background: transparent;
+      border: 1px dashed var(--outline-variant);
+      color: var(--on-surface-muted);
+      font-size: 11px;
+      border-radius: var(--radius-sm);
+      padding: 2px 4px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .btn-add-event-mini:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    /* Grade Units Column & Drop Zone */
+    .grade-cell {
+      padding: var(--space-sm);
+      border-right: 1px solid var(--outline-light);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      position: relative;
+      min-height: 90px;
+    }
+
+    .grade-cell:last-child {
+      border-right: none;
+    }
+
+    .grade-cell.drag-over {
+      background: var(--primary-light);
+      border: 2px dashed var(--primary);
+    }
+
+    /* Unit Card Design */
+    .unit-card {
+      background: var(--card-bg);
+      border: 1px solid var(--outline-light);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      cursor: grab;
+      transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+      position: relative;
+    }
+
+    .unit-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--accent);
+    }
+
+    .unit-card:active {
+      cursor: grabbing;
+    }
+
+    .unit-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-xs);
+      margin-bottom: 4px;
+    }
+
+    .unit-title {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--on-surface);
+      line-height: 1.3;
+    }
+
+    .unit-hours-badge {
+      font-family: var(--font-label);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary-hover);
+      background: var(--primary-light);
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+      white-space: nowrap;
+    }
+
+    .unit-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .unit-tag {
+      font-size: 11px;
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-weight: 600;
+    }
+
+    .tag-draw {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+    }
+
+    .tag-make {
+      background: #fdf2f8;
+      color: #be185d;
+      border: 1px solid #fbcfe8;
+    }
+
+    .tag-apprec {
+      background: #f5f3ff;
+      color: #6d28d9;
+      border: 1px solid #ddd6fe;
+    }
+
+    .tag-code {
+      background: var(--surface-container);
+      color: var(--on-surface-variant);
+      border: 1px solid var(--outline-light);
+      font-family: var(--font-label);
+      font-size: 10.5px;
+    }
+
+    .tag-theme {
+      background: #fefce8;
+      color: #854d0e;
+      border: 1px solid #fef08a;
+      font-size: 10.5px;
+      font-weight: 700;
+    }
+
+    .unit-desc {
+      font-size: 12px;
+      color: var(--on-surface-variant);
+      margin-top: 6px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 1.4;
+    }
+
+    .unit-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 6px;
+      margin-top: 6px;
+      padding-top: 4px;
+      border-top: 1px dashed var(--outline-light);
+    }
+
+    .unit-btn-mini {
+      background: transparent;
+      border: none;
+      color: var(--on-surface-muted);
+      cursor: pointer;
+      font-size: 11px;
+      padding: 2px 4px;
+      border-radius: 3px;
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .unit-btn-mini:hover {
+      color: var(--primary);
+      background: var(--surface-container);
+    }
+
+    /* Add Unit Quick Button inside empty cells */
+    .btn-cell-add {
+      width: 100%;
+      padding: 6px;
+      background: transparent;
+      border: 1px dashed var(--outline-variant);
+      border-radius: var(--radius-sm);
+      color: var(--on-surface-muted);
+      font-size: 11.5px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: all 0.15s;
+    }
+
+    .btn-cell-add:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* Modals & Dialogs */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.5);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-md);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-dialog {
+      background: var(--surface-container-low);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--outline-light);
+      box-shadow: var(--shadow-lg);
+      width: 100%;
+      max-width: 620px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform: translateY(10px);
+      transition: transform 0.2s ease;
+    }
+
+    .modal-backdrop.open .modal-dialog {
+      transform: translateY(0);
+    }
+
+    .modal-header {
+      padding: var(--space-md) var(--space-lg);
+      border-bottom: 1px solid var(--outline-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--surface-container);
+    }
+
+    .modal-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--on-surface);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .modal-body {
+      padding: var(--space-lg);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .modal-footer {
+      padding: var(--space-md) var(--space-lg);
+      border-top: 1px solid var(--outline-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--surface-container);
+    }
+
+    /* Form Inputs */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+    }
+
+    .form-row-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: var(--space-md);
+    }
+
+    label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--on-surface-variant);
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 13.5px;
+      color: var(--on-surface);
+      background: #ffffff;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(21, 128, 61, 0.15);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 70px;
+    }
+
+    /* Toast Notification */
+    .toast-container {
+      position: fixed;
+      bottom: var(--space-xl);
+      right: var(--space-xl);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      pointer-events: none;
+    }
+
+    .toast {
+      background: var(--on-surface);
+      color: #ffffff;
+      padding: 10px 16px;
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      pointer-events: auto;
+      animation: toastIn 0.25s ease-out;
+    }
+
+    .toast.success {
+      background: #14532d;
+      border-left: 4px solid #22c55e;
+    }
+
+    .toast.warning {
+      background: #78350f;
+      border-left: 4px solid #f59e0b;
+    }
+
+    @keyframes toastIn {
+      from { transform: translateY(16px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Print Stylesheet (Optimized for A4 Landscape) */
+    @media print {
+      @page {
+        size: landscape;
+        margin: 8mm;
+      }
+
+      body {
+        background: #ffffff !important;
+        font-size: 10pt !important;
+        color: #000000 !important;
+      }
+
+      .app-wrapper {
+        max-width: 100% !important;
+        padding: 0 !important;
+      }
+
+      .toolbar-wrapper,
+      .btn,
+      .alert-chip,
+      .btn-cell-add,
+      .unit-btn-mini,
+      .btn-add-event-mini,
+      .modal-backdrop,
+      .toast-container {
+        display: none !important;
+      }
+
+      .app-header {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 4mm 0 !important;
+        margin-bottom: 4mm !important;
+      }
+
+      .dashboard-panel {
+        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+        padding: 3mm !important;
+        margin-bottom: 4mm !important;
+      }
+
+      .timeline-container {
+        border: 1px solid #000 !important;
+        box-shadow: none !important;
+      }
+
+      .timeline-header-row {
+        position: static !important;
+        background: #f0f0f0 !important;
+        border-bottom: 1.5pt solid #000 !important;
+      }
+
+      .timeline-month-row {
+        page-break-inside: avoid;
+        border-bottom: 0.75pt solid #aaa !important;
+      }
+
+      .unit-card {
+        box-shadow: none !important;
+        border: 0.75pt solid #666 !important;
+        break-inside: avoid;
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+      .grade-themes-grid {
+        grid-template-columns: 1fr;
+      }
+      .dashboard-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+      .toolbar-inner {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .toolbar-left, .toolbar-right {
+        justify-content: flex-start;
+      }
+      .layout-all .timeline-header-row,
+      .layout-all .timeline-month-row {
+        grid-template-columns: 80px 120px repeat(3, 260px);
+      }
+      .timeline-container {
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="app-wrapper">
+
+  <!-- Header Section with Direct In-place Editing -->
+  <header class="app-header">
+    <div class="header-top">
+      <div class="title-group">
+        <span class="school-tag" onclick="editSchoolMeta()" title="クリックして学校名・年度を変更">
+          <i data-lucide="building" style="width:13px;height:13px;"></i>
+          <span id="school-name-text">横浜市立中学校</span>
+          <span style="font-weight:400;margin-left:4px;" id="school-year-text">【令和8年度】</span>
+        </span>
+        <h1 class="app-title">
+          <span id="plan-title-text" class="app-title-edit" onclick="editSchoolMeta()" title="クリックしてタイトルを変更">中学校美術科 3年間指導計画</span>
+          <span style="font-size:13px;font-weight:500;color:var(--on-surface-muted);margin-left:4px;">(標準時数・指導要領準拠)</span>
+        </h1>
+        <p class="plan-meta">
+          3学年を見通した系統的カリキュラムマネジメント支援環境｜縦軸タイムライン・相互関連・時数管理
+        </p>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:var(--space-sm);">
+        <button type="button" class="btn btn-secondary btn-icon-only" onclick="editSchoolMeta()" title="学校名・基本情報の設定">
+          <i data-lucide="settings" style="width:15px;height:15px;"></i>
+          <span>基本設定</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 3-Year Grade Slogans / Pedagogical Focus (Editable) -->
+    <div class="grade-themes-grid">
+      <div class="theme-box" onclick="editGradeTheme(1)">
+        <div class="theme-label">
+          <span class="header-grade-badge badge-g1">第1学年</span>
+          <span>45時間（週1.3コマ相当）</span>
+        </div>
+        <div class="theme-text" id="g1-theme-text">【知る・育てる】</div>
+        <div style="font-size:11px;color:var(--on-surface-variant);">基礎となる造形的見方・考え方の定着と創造活動の喜び</div>
+      </div>
+      <div class="theme-box" onclick="editGradeTheme(2)">
+        <div class="theme-label">
+          <span class="header-grade-badge badge-g2">第2学年</span>
+          <span>35時間（週1コマ相当）</span>
+        </div>
+        <div class="theme-text" id="g2-theme-text">【深める・活かす】</div>
+        <div style="font-size:11px;color:var(--on-surface-variant);">表現の追求・美意識の向上と他者・社会との関わり</div>
+      </div>
+      <div class="theme-box" onclick="editGradeTheme(3)">
+        <div class="theme-label">
+          <span class="header-grade-badge badge-g3">第3学年</span>
+          <span>35時間（週1コマ相当）</span>
+        </div>
+        <div class="theme-text" id="g3-theme-text">【深める・活かす・つなげる】</div>
+        <div style="font-size:11px;color:var(--on-surface-variant);">自己の想いや未来・伝統文化の継承と心豊かな生活創造</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Interactive KPI & Curriculum Verification Dashboard -->
+  <section class="dashboard-panel" aria-label="指導計画の時数および指導要領検証状況">
+    <div class="dashboard-grid">
+      <!-- Grade 1 KPI -->
+      <div class="kpi-card" id="kpi-g1">
+        <div class="kpi-header">
+          <span class="kpi-title">第1学年 合計時数</span>
+          <span class="header-grade-badge badge-g1">第1学年</span>
+        </div>
+        <div class="kpi-value-row">
+          <span class="kpi-value" id="kpi-g1-hours">0</span>
+          <span class="kpi-target">/ 45時間</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="kpi-g1-bar" style="width: 0%;"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--on-surface-muted);">
+          <span id="kpi-g1-status">計算中…</span>
+          <span id="kpi-g1-pct">0%</span>
+        </div>
+      </div>
+
+      <!-- Grade 2 KPI -->
+      <div class="kpi-card" id="kpi-g2">
+        <div class="kpi-header">
+          <span class="kpi-title">第2学年 合計時数</span>
+          <span class="header-grade-badge badge-g2">第2学年</span>
+        </div>
+        <div class="kpi-value-row">
+          <span class="kpi-value" id="kpi-g2-hours">0</span>
+          <span class="kpi-target">/ 35時間</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="kpi-g2-bar" style="width: 0%;"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--on-surface-muted);">
+          <span id="kpi-g2-status">計算中…</span>
+          <span id="kpi-g2-pct">0%</span>
+        </div>
+      </div>
+
+      <!-- Grade 3 KPI -->
+      <div class="kpi-card" id="kpi-g3">
+        <div class="kpi-header">
+          <span class="kpi-title">第3学年 合計時数</span>
+          <span class="header-grade-badge badge-g3">第3学年</span>
+        </div>
+        <div class="kpi-value-row">
+          <span class="kpi-value" id="kpi-g3-hours">0</span>
+          <span class="kpi-target">/ 35時間</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="kpi-g3-bar" style="width: 0%;"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--on-surface-muted);">
+          <span id="kpi-g3-status">計算中…</span>
+          <span id="kpi-g3-pct">0%</span>
+        </div>
+      </div>
+
+      <!-- Total 3-Year KPI -->
+      <div class="kpi-card" id="kpi-total">
+        <div class="kpi-header">
+          <span class="kpi-title">3年間総合計時数</span>
+          <span style="font-size:11px;font-weight:700;color:var(--primary);">標準 115時間</span>
+        </div>
+        <div class="kpi-value-row">
+          <span class="kpi-value" id="kpi-total-hours">0</span>
+          <span class="kpi-target">/ 115時間</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="kpi-total-bar" style="width: 0%;"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--on-surface-muted);">
+          <span id="kpi-total-status">計算中…</span>
+          <span id="kpi-total-pct">0%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Guideline Balance & Compliance Verification Chips -->
+    <div class="verification-strip">
+      <span class="verification-strip-title">
+        <i data-lucide="check-circle-2" style="width:15px;height:15px;color:var(--primary);"></i>
+        指導要領バランス検証:
+      </span>
+      <div id="guideline-chips-container" style="display:inline-flex;flex-wrap:wrap;gap:6px;">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Toolbar (Generous Clearance; Never Overlaps Timeline Top) -->
+  <nav class="toolbar-wrapper" aria-label="カリキュラム操作ツールバー">
+    <div class="toolbar-inner">
+      <div class="toolbar-left">
+        <!-- Add Unit Primary Button -->
+        <button type="button" class="btn btn-primary" onclick="openAddUnitModal()">
+          <i data-lucide="plus-circle" style="width:16px;height:16px;"></i>
+          <span>＋ 新しい題材を追加</span>
+        </button>
+
+        <!-- View Switcher Tabs -->
+        <div class="view-tabs" role="tablist">
+          <button type="button" role="tab" class="view-tab-btn active" id="tab-all" onclick="switchView('all')">
+            <i data-lucide="columns-3" style="width:14px;height:14px;"></i>
+            <span>【全学年】</span>
+          </button>
+          <button type="button" role="tab" class="view-tab-btn" id="tab-g1" onclick="switchView('g1')">
+            <span>【第1学年 (45時間)】</span>
+          </button>
+          <button type="button" role="tab" class="view-tab-btn" id="tab-g23" onclick="switchView('g23')">
+            <i data-lucide="split" style="width:14px;height:14px;"></i>
+            <span>【第2・3学年 (各35時間)】左右並列</span>
+          </button>
+        </div>
+
+        <!-- History Undo / Redo -->
+        <div style="display:inline-flex;gap:4px;">
+          <button type="button" class="btn btn-secondary btn-icon-only" id="btn-undo" onclick="handleUndo()" title="元に戻す (Ctrl+Z)" disabled>
+            <i data-lucide="undo-2" style="width:15px;height:15px;"></i>
+          </button>
+          <button type="button" class="btn btn-secondary btn-icon-only" id="btn-redo" onclick="handleRedo()" title="やり直す (Ctrl+Y)" disabled>
+            <i data-lucide="redo-2" style="width:15px;height:15px;"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="toolbar-right">
+        <!-- CRITICAL REQUIREMENT: Independent Batch Delete Button to start from scratch -->
+        <button type="button" class="btn btn-clear-all" onclick="confirmClearAll()" title="すべての題材データを一括消去して白紙状態から1から入力します">
+          <i data-lucide="trash-2" style="width:15px;height:15px;"></i>
+          <span>🗑️ データを1から入力（全件一括削除）</span>
+        </button>
+
+        <!-- Save to CSV for Excel (with UTF-8 BOM) -->
+        <button type="button" class="btn btn-secondary" onclick="exportToCsv()" title="Excelで直接開ける文字化け防止BOM付きCSVを出力">
+          <i data-lucide="file-spreadsheet" style="width:15px;height:15px;color:var(--primary);"></i>
+          <span>💾 Excel(CSV)保存</span>
+        </button>
+
+        <!-- Import CSV / JSON -->
+        <button type="button" class="btn btn-secondary" onclick="triggerFileInput()" title="CSVまたはJSONファイルから指導計画データを読み込みます">
+          <i data-lucide="folder-open" style="width:15px;height:15px;"></i>
+          <span>📂 データを読み込む</span>
+        </button>
+        <input type="file" id="file-importer" accept=".csv,.json" style="display:none;" onchange="handleFileSelected(event)">
+
+        <!-- Print / PDF -->
+        <button type="button" class="btn btn-secondary" onclick="window.print()" title="A4横向き印刷・PDF出力画面を開きます">
+          <i data-lucide="printer" style="width:15px;height:15px;"></i>
+          <span>🖨️ 印刷 / PDF</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Vertical Timeline Main Container (4月 to 3月) -->
+  <main class="timeline-container layout-all" id="timeline-container">
+    <!-- Header Row (Dynamic based on selected view) -->
+    <div class="timeline-header-row" id="timeline-header-row">
+      <!-- Rendered dynamically by updateTimelineView() -->
+    </div>
+
+    <!-- Monthly Rows Container -->
+    <div id="timeline-rows-container">
+      <!-- 12 Monthly rows (4月 through 3月) generated dynamically -->
+    </div>
+  </main>
+
+</div>
+
+<!-- Modal: Add / Edit Unit -->
+<div class="modal-backdrop" id="unit-modal" role="dialog" aria-modal="true" aria-labelledby="unit-modal-title">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <h2 class="modal-title" id="unit-modal-title">
+        <i data-lucide="palette" style="width:18px;height:18px;color:var(--primary);"></i>
+        <span>題材の登録・編集</span>
+      </h2>
+      <button type="button" class="btn btn-secondary btn-icon-only" onclick="closeUnitModal()">
+        <i data-lucide="x" style="width:16px;height:16px;"></i>
+      </button>
+    </div>
+
+    <form id="unit-form" onsubmit="handleSaveUnit(event)">
+      <input type="hidden" id="edit-unit-id" value="">
+
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="modal-unit-name">題材名 <span style="color:var(--error);">*</span></label>
+          <input type="text" id="modal-unit-name" required placeholder="例：見つめる 感じる、伝わるデザイン、未来の夢">
+        </div>
+
+        <div class="form-row-3">
+          <div class="form-group">
+            <label for="modal-unit-grade">対象学年 <span style="color:var(--error);">*</span></label>
+            <select id="modal-unit-grade" required onchange="handleGradeChangedInModal()">
+              <option value="1">第1学年 (45h目標)</option>
+              <option value="2">第2学年 (35h目標)</option>
+              <option value="3">第3学年 (35h目標)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="modal-unit-month">実施月 <span style="color:var(--error);">*</span></label>
+            <select id="modal-unit-month" required>
+              <option value="4">4月</option>
+              <option value="5">5月</option>
+              <option value="6">6月</option>
+              <option value="7">7月</option>
+              <option value="8">8月</option>
+              <option value="9">9月</option>
+              <option value="10">10月</option>
+              <option value="11">11月</option>
+              <option value="12">12月</option>
+              <option value="1">1月</option>
+              <option value="2">2月</option>
+              <option value="3">3月</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="modal-unit-hours">予定配当時数 (時間) <span style="color:var(--error);">*</span></label>
+            <input type="number" id="modal-unit-hours" required min="1" max="30" value="8">
+          </div>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="modal-unit-category">指導要領 領域・項目 <span style="color:var(--error);">*</span></label>
+            <select id="modal-unit-category" required>
+              <option value="A_EXPR_1_A">Ａ表現 (1)ア (感じ取ったことや考えたこと等)</option>
+              <option value="A_EXPR_1_I_A">Ａ表現 (1)イ(ア) (構成や装飾を考えた表現)</option>
+              <option value="A_EXPR_1_I_I">Ａ表現 (1)イ(イ) (伝達・情報を考えたデザイン)</option>
+              <option value="A_EXPR_1_I_U">Ａ表現 (1)イ(ウ) (用途や機能・生活の工芸)</option>
+              <option value="B_APPR_1_A_A">Ｂ鑑賞 (1)ア(ア) (美術作品のよさや美しさ)</option>
+              <option value="B_APPR_1_A_I">Ｂ鑑賞 (1)ア(イ) (目的や機能との調和)</option>
+              <option value="B_APPR_1_I_A">Ｂ鑑賞 (1)イ(ア) (美術の働き・生活と社会)</option>
+              <option value="B_APPR_1_I_I">Ｂ鑑賞 (1)イ(イ) (美術文化・伝統・文化遺産)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="modal-unit-activity">活動形態 <span style="color:var(--error);">*</span></label>
+            <select id="modal-unit-activity" required>
+              <option value="draw">描く活動 (絵画・平面・スケッチ)</option>
+              <option value="make">つくる活動 (立体・彫刻・工芸制作)</option>
+              <option value="appreciation">鑑賞専科 (対話型鑑賞・文化研究)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="modal-unit-common">〔共通事項〕の視点</label>
+          <select id="modal-unit-common">
+            <option value="アイ">(1)ア・イ 両方 (造形の要素＆全体のイメージ・作風)</option>
+            <option value="ア">(1)ア (形・色彩・材料・光などの性質と効果)</option>
+            <option value="イ">(1)イ (造形的な特徴や作風・全体のイメージ)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="modal-unit-theme-tag">学習のねらい・キーワード（バッジ表示）</label>
+          <input type="text" id="modal-unit-theme-tag" placeholder="例：伝える、装飾、使う、観察、感情の表現">
+        </div>
+
+        <div class="form-group">
+          <label for="modal-unit-desc">題材の目標・活動内容・想い</label>
+          <textarea id="modal-unit-desc" placeholder="モチーフをよく観察し鉛筆で表現する活動を通して、見る面白さや想いを込めて制作することの大切さを考える…"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="modal-unit-materials">主な材料・用具・ICTツール</label>
+          <input type="text" id="modal-unit-materials" placeholder="例：4B鉛筆、画用紙、彫刻刀、アクリル絵の具、タブレット端末">
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div>
+          <button type="button" class="btn btn-clear-all" id="btn-modal-delete" style="display:none;" onclick="handleDeleteUnitInModal()">
+            <i data-lucide="trash" style="width:14px;height:14px;"></i>
+            <span>削除</span>
+          </button>
+        </div>
+        <div style="display:flex;gap:var(--space-sm);">
+          <button type="button" class="btn btn-secondary" onclick="closeUnitModal()">キャンセル</button>
+          <button type="submit" class="btn btn-primary">
+            <i data-lucide="check" style="width:16px;height:16px;"></i>
+            <span>保存する</span>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Edit Monthly Events -->
+<div class="modal-backdrop" id="event-modal" role="dialog" aria-modal="true">
+  <div class="modal-dialog" style="max-width: 480px;">
+    <div class="modal-header">
+      <h2 class="modal-title">
+        <i data-lucide="calendar" style="width:18px;height:18px;color:var(--primary);"></i>
+        <span id="event-modal-title">行事・評価予定の編集</span>
+      </h2>
+      <button type="button" class="btn btn-secondary btn-icon-only" onclick="closeEventModal()">
+        <i data-lucide="x" style="width:16px;height:16px;"></i>
+      </button>
+    </div>
+
+    <form id="event-form" onsubmit="handleSaveEvent(event)">
+      <input type="hidden" id="event-modal-month" value="">
+      <input type="hidden" id="event-modal-index" value="-1">
+
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="event-modal-name">行事・評価名 <span style="color:var(--error);">*</span></label>
+          <input type="text" id="event-modal-name" required placeholder="例：1学期中間テスト、校内美術展、成績評価提出">
+        </div>
+
+        <div class="form-group">
+          <label for="event-modal-type">種別</label>
+          <select id="event-modal-type">
+            <option value="default">一般行事・オリエンテーション</option>
+            <option value="exam">定期テスト・評価期間</option>
+            <option value="exhibit">作品展・発表会・鑑賞会</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div>
+          <button type="button" class="btn btn-clear-all" id="btn-event-delete" style="display:none;" onclick="handleDeleteEventInModal()">
+            <span>削除</span>
+          </button>
+        </div>
+        <div style="display:flex;gap:var(--space-sm);">
+          <button type="button" class="btn btn-secondary" onclick="closeEventModal()">キャンセル</button>
+          <button type="submit" class="btn btn-primary">保存する</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Edit School Meta & Titles -->
+<div class="modal-backdrop" id="meta-modal" role="dialog" aria-modal="true">
+  <div class="modal-dialog" style="max-width: 480px;">
+    <div class="modal-header">
+      <h2 class="modal-title">
+        <i data-lucide="settings" style="width:18px;height:18px;color:var(--primary);"></i>
+        <span>学校名・指導計画名の設定</span>
+      </h2>
+      <button type="button" class="btn btn-secondary btn-icon-only" onclick="closeMetaModal()">
+        <i data-lucide="x" style="width:16px;height:16px;"></i>
+      </button>
+    </div>
+
+    <form id="meta-form" onsubmit="handleSaveMeta(event)">
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="modal-school-name">学校名</label>
+          <input type="text" id="modal-school-name" required>
+        </div>
+        <div class="form-group">
+          <label for="modal-school-year">年度・期</label>
+          <input type="text" id="modal-school-year" required placeholder="例：令和8年度">
+        </div>
+        <div class="form-group">
+          <label for="modal-plan-title">計画タイトル</label>
+          <input type="text" id="modal-plan-title" required>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeMetaModal()">キャンセル</button>
+        <button type="submit" class="btn btn-primary">保存する</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toast-container"></div>
+
+<!-- Notebook Shim API for State Persistence -->
+<api-shim></api-shim>
+
+<script>
+  /**
+   * Application State & Data Model
+   * Based directly on Japanese Middle School Course of Study (美術科)
+   */
+  const MONTHS_ORDER = [4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3];
+
+  const MONTH_NAMES = {
+    4: '4月', 5: '5月', 6: '6月', 7: '7月', 8: '8月', 9: '9月',
+    10: '10月', 11: '11月', 12: '12月', 1: '1月', 2: '2月', 3: '3月'
+  };
+
+  const CATEGORY_MAP = {
+    'A_EXPR_1_A': { label: 'Ａ表現(1)ア', tag: '想い・感性', desc: '感じ取ったこと・考えたことを基にした表現' },
+    'A_EXPR_1_I_A': { label: 'Ａ表現(1)イ(ア)', tag: '構成・装飾', desc: '構成や装飾を考えた表現' },
+    'A_EXPR_1_I_I': { label: 'Ａ表現(1)イ(イ)', tag: '伝達・デザイン', desc: '伝える目的を考えたデザイン' },
+    'A_EXPR_1_I_U': { label: 'Ａ表現(1)イ(ウ)', tag: '用途・機能・工芸', desc: '使う目的を考えた工芸・立体' },
+    'B_APPR_1_A_A': { label: 'Ｂ鑑賞(1)ア(ア)', tag: '作品鑑賞', desc: '造形的なよさ・作者の心情と工夫' },
+    'B_APPR_1_A_I': { label: 'Ｂ鑑賞(1)ア(イ)', tag: 'デザイン鑑賞', desc: '機能性と美しさの調和' },
+    'B_APPR_1_I_A': { label: 'Ｂ鑑賞(1)イ(ア)', tag: '美術の働き', desc: '生活や社会を豊かにする美術' },
+    'B_APPR_1_I_I': { label: 'Ｂ鑑賞(1)イ(イ)', tag: '美術文化・伝統', desc: '我が国や諸外国の美術文化・歴史' }
+  };
+
+  // Standard Curriculum Default Units (Without any 78期 or 典拠資料 labels)
+  const DEFAULT_UNITS = [
+    // --- 第1学年 (計45時間) ---
+    {
+      id: 'g1_u1',
+      grade: 1,
+      month: 4,
+      title: '見つめる 感じる',
+      hours: 8,
+      category: 'A_EXPR_1_A',
+      activity: 'draw',
+      common: 'アイ',
+      themeTag: '観察',
+      desc: '身近なモチーフをよく観察し鉛筆で表現する活動を通して、見る面白さや想いを込めて制作する大切さを学び、心豊かに表現する感性を培う。',
+      materials: '4B〜2H鉛筆、画用紙、練り消しゴム'
+    },
+    {
+      id: 'g1_u2',
+      grade: 1,
+      month: 5,
+      title: '伝わるデザイン',
+      hours: 10,
+      category: 'A_EXPR_1_I_I',
+      activity: 'draw',
+      common: 'アイ',
+      themeTag: '伝える',
+      desc: '形や色彩の効果を学び、文字をデザインしオノマトペで表現する。イメージを伝えることを目的とし、分かりやすさと美しさとの調和を考える。',
+      materials: 'ポスターカラー、溝引き定規、デザイン用筆'
+    },
+    {
+      id: 'g1_u3',
+      grade: 1,
+      month: 9,
+      title: '感情のカタチ',
+      hours: 9,
+      category: 'A_EXPR_1_A',
+      activity: 'make',
+      common: 'アイ',
+      themeTag: '感情の表現',
+      desc: '目に見えない自分の感情や想いに向き合い立体作品を制作する。造形的な見方・考え方を働かせて立体的な美しさを工夫する。',
+      materials: '水粘土・紙粘土、ヘラ、芯材'
+    },
+    {
+      id: 'g1_u4',
+      grade: 1,
+      month: 10,
+      title: '手仕事の魅力',
+      hours: 2,
+      category: 'B_APPR_1_A_I',
+      activity: 'appreciation',
+      common: 'イ',
+      themeTag: '伝統工芸',
+      desc: '鎌倉彫など日本の伝統工芸品を鑑賞し、職人の手の技や素材の良さ、用の美を感じ取りながら、見方・感じ方を広げる。',
+      materials: '工芸品実物資料、ルーペ、解説スライド'
+    },
+    {
+      id: 'g1_u5',
+      grade: 1,
+      month: 11,
+      title: 'ぬくもりと生活',
+      hours: 10,
+      category: 'A_EXPR_1_I_U',
+      activity: 'make',
+      common: 'アイ',
+      themeTag: '使う',
+      desc: '文様や模様の特徴を学び木彫作品を制作する。デザインの構成や装飾の美しさを考え、生活の中で実際に使う用と美の調和を追求する。',
+      materials: '桂・朴木材、彫刻刀、サンドペーパー、オイルフィニッシュ'
+    },
+    {
+      id: 'g1_u6',
+      grade: 1,
+      month: 1,
+      title: '贈るデザイン',
+      hours: 4,
+      category: 'A_EXPR_1_I_A',
+      activity: 'make',
+      common: 'アイ',
+      themeTag: '装飾',
+      desc: 'ロゴやパッケージに込められた想いを鑑賞した上で、感謝を伝えるポップアップカードを制作し、立体的な構成と装飾の効果を学ぶ。',
+      materials: '色画用紙、カッターナイフ、カッティングマット、糊'
+    },
+    {
+      id: 'g1_u7',
+      grade: 1,
+      month: 2,
+      title: '日本の“美”と世界の表現',
+      hours: 2,
+      category: 'B_APPR_1_I_I',
+      activity: 'appreciation',
+      common: 'イ',
+      themeTag: '文化と多様性',
+      desc: '屏風や襖絵などの日本美術と世界の著名な絵画作品を対比鑑賞し、作者の心情や文化・時代背景による表現の多様性を考える。',
+      materials: '高精細鑑賞カード、プロジェクター'
+    },
+
+    // --- 第2学年 (計35時間) ---
+    {
+      id: 'g2_u1',
+      grade: 2,
+      month: 4,
+      title: '学校を飾ろう',
+      hours: 10,
+      category: 'A_EXPR_1_I_A',
+      activity: 'draw',
+      common: 'アイ',
+      themeTag: '装飾',
+      desc: '自然の美をテーマに模様を考え、ステンドグラス絵の具で制作。光に透ける色彩や展示場所の環境との調和を意識して創造的に表現する。',
+      materials: '透明アクリル板、ステンドグラス絵具、アウトライナー'
+    },
+    {
+      id: 'g2_u2',
+      grade: 2,
+      month: 6,
+      title: '何を見た 何を感じた',
+      hours: 2,
+      category: 'B_APPR_1_A_A',
+      activity: 'appreciation',
+      common: 'アイ',
+      themeTag: '風景鑑賞',
+      desc: '風景を基に制作された東西の名画を鑑賞し、作者の視点や構図の工夫、光の捉え方を味わい美意識を高める。',
+      materials: '名画鑑賞スライド、ワークシート'
+    },
+    {
+      id: 'g2_u3',
+      grade: 2,
+      month: 9,
+      title: '惹かれる景色 情景を描く',
+      hours: 10,
+      category: 'A_EXPR_1_A',
+      activity: 'draw',
+      common: 'アイ',
+      themeTag: '情景表現',
+      desc: '日常の何気ない風景を深く観察し、構図の工夫や遠近法・色彩の感情効果を活用して自分の感じる印象を絵画として描き出す。',
+      materials: '透明水彩絵の具、水彩紙、デッサン額'
+    },
+    {
+      id: 'g2_u4',
+      grade: 2,
+      month: 11,
+      title: '！ わかるデザイン',
+      hours: 6,
+      category: 'A_EXPR_1_I_I',
+      activity: 'make',
+      common: 'アイ',
+      themeTag: '伝える',
+      desc: '学校や地域の課題を解決し行動を促すピクトグラムをタブレット端末等で制作。他者に明確かつ美しく伝えるデザインの力を深める。',
+      materials: 'タブレットPC、グラフィック作成アプリ'
+    },
+    {
+      id: 'g2_u5',
+      grade: 2,
+      month: 1,
+      title: '灯りのデザイン',
+      hours: 6,
+      category: 'A_EXPR_1_I_A',
+      activity: 'make',
+      common: 'アイ',
+      themeTag: '装飾',
+      desc: '様々な質感の紙や骨組みを用いてランプシェードを制作。光と影が空間にもたらす情緒的な効果や生活を彩る美術の働きを追求する。',
+      materials: '和紙、針金・木製フレーム、LEDライト器具'
+    },
+    {
+      id: 'g2_u6',
+      grade: 2,
+      month: 2,
+      title: '有名作品鑑賞',
+      hours: 1,
+      category: 'B_APPR_1_A_A',
+      activity: 'appreciation',
+      common: 'イ',
+      themeTag: '美意識の深化',
+      desc: '作者の生涯や時代背景を踏まえて作品と深く対話し、批評し合う活動を通して見方や感じ方を深める。',
+      materials: '対話型鑑賞用大型図版'
+    },
+
+    // --- 第3学年 (計35時間) ---
+    {
+      id: 'g3_u1',
+      grade: 3,
+      month: 4,
+      title: '未来の夢',
+      hours: 10,
+      category: 'A_EXPR_1_A',
+      activity: 'make',
+      common: 'アイ',
+      themeTag: '自己探究',
+      desc: '将来の自分や希望する世界をテーマに、材料を選択して半抽象立体作品を制作。自らの想いと向き合い材料の特性を生かして構想を練る。',
+      materials: '石塑粘土、木材、針金、アクリル着色'
+    },
+    {
+      id: 'g3_u2',
+      grade: 3,
+      month: 6,
+      title: '写真とアート',
+      hours: 2,
+      category: 'B_APPR_1_I_A',
+      activity: 'appreciation',
+      common: 'アイ',
+      themeTag: '映像メディア',
+      desc: '写真や映像メディアにおける造形的な工夫やメッセージ性を読み解き、現代社会におけるアートの新たな可能性を探る。',
+      materials: 'デジタルカメラ・写真作品集、液晶ディスプレイ'
+    },
+    {
+      id: 'g3_u3',
+      grade: 3,
+      month: 9,
+      title: '仏像と美の精神',
+      hours: 2,
+      category: 'B_APPR_1_A_A',
+      activity: 'appreciation',
+      common: 'イ',
+      themeTag: '伝統彫刻',
+      desc: '修学旅行での古都訪問と連動し、飛鳥・天平・鎌倉時代の仏像彫刻を鑑賞。祈りの造形美や時代による様式の変遷を味わう。',
+      materials: '文化遺産3Dモデル、図録、比較年表'
+    },
+    {
+      id: 'g3_u4',
+      grade: 3,
+      month: 10,
+      title: '空間のデザイン',
+      hours: 8,
+      category: 'A_EXPR_1_I_U',
+      activity: 'draw',
+      common: 'アイ',
+      themeTag: '伝える',
+      desc: 'より良い社会づくりのために、公共空間やコミュニティスペースのリデザインを構想・提案。機能性と美の調和を総合的に思考する。',
+      materials: 'ケント紙、透視図法用具、コピックマーカー'
+    },
+    {
+      id: 'g3_u5',
+      grade: 3,
+      month: 11,
+      title: '建築から“みる”歴史と文化',
+      hours: 2,
+      category: 'B_APPR_1_I_I',
+      activity: 'appreciation',
+      common: 'イ',
+      themeTag: '建築文化',
+      desc: '日本と諸外国の伝統建築および近代建築を比較鑑賞。風土や素材、人々の思想と空間造形との関わりを多角的に捉える。',
+      materials: '世界遺産建築スライド、設計図面サンプル'
+    },
+    {
+      id: 'g3_u6',
+      grade: 3,
+      month: 12,
+      title: 'デザインの効果とは？',
+      hours: 1,
+      category: 'B_APPR_1_A_I',
+      activity: 'appreciation',
+      common: 'ア',
+      themeTag: '用の美',
+      desc: 'ユニバーサルデザインや優れた工業製品を鑑賞し、使う人の心理や身体特性に配慮した美の工夫を検証する。',
+      materials: '日用品実物、比較ワークシート'
+    },
+    {
+      id: 'g3_u7',
+      grade: 3,
+      month: 1,
+      title: '叩いて磨いて 金工細工',
+      hours: 10,
+      category: 'A_EXPR_1_I_A',
+      activity: 'make',
+      common: 'アイ',
+      themeTag: '使う',
+      desc: '真鍮や銅などの金属板を叩き、削り、磨く鍛金・彫金技法を用いて、実際に身に着けたり生活で使う作品を丹念に制作する。',
+      materials: '真鍮板、金づち、金床、糸のこ、耐水ペーパー、研磨剤'
+    }
+  ];
+
+  // Default Monthly Events & Evaluation Milestones
+  const DEFAULT_EVENTS = {
+    4: [{ name: '新学期始業式・オリエンテーション', type: 'default' }],
+    5: [{ name: '1学期中間テスト', type: 'exam' }],
+    6: [{ name: '教育実習期間・校内美化', type: 'default' }],
+    7: [{ name: '1学期期末テスト・前期評価', type: 'exam' }],
+    8: [{ name: '夏季休業（部活動・教員研修）', type: 'default' }],
+    9: [{ name: '修学旅行（3年）・校外学習', type: 'default' }],
+    10: [{ name: '体育祭・文化週間開始', type: 'default' }],
+    11: [{ name: '2学期中間テスト', type: 'exam' }, { name: '校内美術作品展', type: 'exhibit' }],
+    12: [{ name: '2学期期末テスト・成績処理', type: 'exam' }],
+    1: [{ name: '3学期始業式・新春作品展示', type: 'exhibit' }],
+    2: [{ name: '学年末テスト', type: 'exam' }, { name: '3年生卒業制作展', type: 'exhibit' }],
+    3: [{ name: '卒業証書授与式・修了式', type: 'default' }]
+  };
+
+  // Mutable Application State
+  let planData = {
+    schoolName: '横浜市立中学校',
+    schoolYear: '令和8年度',
+    planTitle: '中学校美術科 3年間指導計画',
+    gradeThemes: {
+      1: '【知る・育てる】',
+      2: '【深める・活かす】',
+      3: '【深める・活かす・つなげる】'
+    },
+    units: JSON.parse(JSON.stringify(DEFAULT_UNITS)),
+    events: JSON.parse(JSON.stringify(DEFAULT_EVENTS))
+  };
+
+  let currentView = 'all'; // 'all' | 'g1' | 'g23'
+  let draggedUnitId = null;
+
+  // History Stack for Undo / Redo
+  let historyStack = [];
+  let historyIndex = -1;
+  const MAX_HISTORY = 30;
+
+  /**
+   * Initialize Application
+   */
+  window.addEventListener('DOMContentLoaded', async function() {
+    // Record initial state in history
+    pushHistoryState('初期読み込み');
+
+    // Attempt to restore persistent state if available
+    try {
+      if (window.notebookAppApi && typeof window.notebookAppApi.getAppState === 'function') {
+        const saved = await window.notebookAppApi.getAppState();
+        if (saved && saved.planData) {
+          planData = saved.planData;
+          if (saved.currentView) currentView = saved.currentView;
+          // reset history stack to current
+          historyStack = [JSON.parse(JSON.stringify(planData))];
+          historyIndex = 0;
+        }
+      }
+    } catch (err) {
+      console.warn('Could not load persistent state:', err);
+    }
+
+    renderAll();
+    setupKeyboardShortcuts();
+
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+      window.lucide.createIcons();
+    }
+  });
+
+  /**
+   * Push Snapshot to History Stack
+   */
+  function pushHistoryState(actionLabel) {
+    // Truncate future states if we performed an undo and then a new action
+    if (historyIndex < historyStack.length - 1) {
+      historyStack = historyStack.slice(0, historyIndex + 1);
+    }
+
+    const snapshot = JSON.parse(JSON.stringify(planData));
+    historyStack.push(snapshot);
+
+    if (historyStack.length > MAX_HISTORY) {
+      historyStack.shift();
+    } else {
+      historyIndex++;
+    }
+
+    updateUndoRedoButtons();
+    persistState();
+  }
+
+  function handleUndo() {
+    if (historyIndex > 0) {
+      historyIndex--;
+      planData = JSON.parse(JSON.stringify(historyStack[historyIndex]));
+      renderAll();
+      updateUndoRedoButtons();
+      persistState();
+      showToast('操作を元に戻しました');
+    }
+  }
+
+  function handleRedo() {
+    if (historyIndex < historyStack.length - 1) {
+      historyIndex++;
+      planData = JSON.parse(JSON.stringify(historyStack[historyIndex]));
+      renderAll();
+      updateUndoRedoButtons();
+      persistState();
+      showToast('操作をやり直しました');
+    }
+  }
+
+  function updateUndoRedoButtons() {
+    const btnUndo = document.getElementById('btn-undo');
+    const btnRedo = document.getElementById('btn-redo');
+    if (btnUndo) btnUndo.disabled = (historyIndex <= 0);
+    if (btnRedo) btnRedo.disabled = (historyIndex >= historyStack.length - 1);
+  }
+
+  function persistState() {
+    if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === 'function') {
+      window.notebookAppApi.setAppState({
+        planData: planData,
+        currentView: currentView
+      }).catch(function(e) { console.error('Persistence failed', e); });
+    }
+  }
+
+  function setupKeyboardShortcuts() {
+    window.addEventListener('keydown', function(e) {
+      if ((e.ctrlKey || e.metaKey) && !e.shiftKey && e.key.toLowerCase() === 'z') {
+        e.preventDefault();
+        handleUndo();
+      } else if ((e.ctrlKey || e.metaKey) && (e.key.toLowerCase() === 'y' || (e.shiftKey && e.key.toLowerCase() === 'z'))) {
+        e.preventDefault();
+        handleRedo();
+      }
+    });
+  }
+
+  /**
+   * CRITICAL FEATURE: Start From Scratch / Batch Delete
+   */
+  function confirmClearAll() {
+    const unitCount = planData.units.length;
+    const msg = `【確認】全題材データを一括削除しますか？\n\n現在登録されている全ての題材（計 ${unitCount} 件）を消去し、白紙の状態から1から入力を開始します。\n\n※この操作はツールバーの「元に戻す（Undo）」ボタンでいつでも取り消せます。`;
+    
+    if (window.confirm(msg)) {
+      planData.units = [];
+      pushHistoryState('全題材一括削除');
+      renderAll();
+      showToast('すべての題材データを消去しました。1から入力を開始してください。', 'warning');
+    }
+  }
+
+  /**
+   * Switch Timeline Views
+   */
+  function switchView(viewKey) {
+    currentView = viewKey;
+    const tabAll = document.getElementById('tab-all');
+    const tabG1 = document.getElementById('tab-g1');
+    const tabG23 = document.getElementById('tab-g23');
+
+    if (tabAll) tabAll.classList.toggle('active', viewKey === 'all');
+    if (tabG1) tabG1.classList.toggle('active', viewKey === 'g1');
+    if (tabG23) tabG23.classList.toggle('active', viewKey === 'g23');
+
+    const container = document.getElementById('timeline-container');
+    if (container) {
+      container.className = `timeline-container layout-${viewKey}`;
+    }
+
+    renderTimeline();
+    persistState();
+  }
+
+  /**
+   * Master Render Function
+   */
+  function renderAll() {
+    renderHeaderInfo();
+    renderKPIs();
+    renderGuidelineChips();
+    renderTimeline();
+
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+      window.lucide.createIcons();
+    }
+  }
+
+  function renderHeaderInfo() {
+    const sName = document.getElementById('school-name-text');
+    const sYear = document.getElementById('school-year-text');
+    const pTitle = document.getElementById('plan-title-text');
+    const g1Theme = document.getElementById('g1-theme-text');
+    const g2Theme = document.getElementById('g2-theme-text');
+    const g3Theme = document.getElementById('g3-theme-text');
+
+    if (sName) sName.textContent = planData.schoolName;
+    if (sYear) sYear.textContent = `【${planData.schoolYear}】`;
+    if (pTitle) pTitle.textContent = planData.planTitle;
+    if (g1Theme) g1Theme.textContent = planData.gradeThemes[1] || '【知る・育てる】';
+    if (g2Theme) g2Theme.textContent = planData.gradeThemes[2] || '【深める・活かす】';
+    if (g3Theme) g3Theme.textContent = planData.gradeThemes[3] || '【深める・活かす・つなげる】';
+  }
+
+  /**
+   * Calculate Hours & Statistics
+   */
+  function calculateStats() {
+    let g1 = 0, g2 = 0, g3 = 0;
+    
+    // Detailed item trackers
+    const counts = {
+      1: { draw: 0, make: 0, apprec: 0, exprA: 0, exprI: 0 },
+      2: { draw: 0, make: 0, apprec: 0, exprA: 0, exprI: 0 },
+      3: { draw: 0, make: 0, apprec: 0, exprA: 0, exprI: 0 }
+    };
+
+    planData.units.forEach(u => {
+      const h = Number(u.hours) || 0;
+      if (u.grade === 1) {
+        g1 += h;
+        if (counts[1]) {
+          if (u.activity === 'draw') counts[1].draw += h;
+          if (u.activity === 'make') counts[1].make += h;
+          if (u.activity === 'appreciation') counts[1].apprec += h;
+          if (u.category.startsWith('A_EXPR_1_A')) counts[1].exprA += h;
+          if (u.category.startsWith('A_EXPR_1_I')) counts[1].exprI += h;
+        }
+      } else if (u.grade === 2) {
+        g2 += h;
+        if (counts[2]) {
+          if (u.activity === 'draw') counts[2].draw += h;
+          if (u.activity === 'make') counts[2].make += h;
+          if (u.activity === 'appreciation') counts[2].apprec += h;
+          if (u.category.startsWith('A_EXPR_1_A')) counts[2].exprA += h;
+          if (u.category.startsWith('A_EXPR_1_I')) counts[2].exprI += h;
+        }
+      } else if (u.grade === 3) {
+        g3 += h;
+        if (counts[3]) {
+          if (u.activity === 'draw') counts[3].draw += h;
+          if (u.activity === 'make') counts[3].make += h;
+          if (u.activity === 'appreciation') counts[3].apprec += h;
+          if (u.category.startsWith('A_EXPR_1_A')) counts[3].exprA += h;
+          if (u.category.startsWith('A_EXPR_1_I')) counts[3].exprI += h;
+        }
+      }
+    });
+
+    return {
+      g1, g2, g3,
+      total: g1 + g2 + g3,
+      counts
+    };
+  }
+
+  function renderKPIs() {
+    const stats = calculateStats();
+
+    // Grade 1 (Target: 45)
+    updateKpiCard('kpi-g1-hours', 'kpi-g1-bar', 'kpi-g1-status', 'kpi-g1-pct', stats.g1, 45);
+
+    // Grade 2 (Target: 35)
+    updateKpiCard('kpi-g2-hours', 'kpi-g2-bar', 'kpi-g2-status', 'kpi-g2-pct', stats.g2, 35);
+
+    // Grade 3 (Target: 35)
+    updateKpiCard('kpi-g3-hours', 'kpi-g3-bar', 'kpi-g3-status', 'kpi-g3-pct', stats.g3, 35);
+
+    // Total (Target: 115)
+    updateKpiCard('kpi-total-hours', 'kpi-total-bar', 'kpi-total-status', 'kpi-total-pct', stats.total, 115);
+  }
+
+  function updateKpiCard(hoursId, barId, statusId, pctId, actual, target) {
+    const elH = document.getElementById(hoursId);
+    const elBar = document.getElementById(barId);
+    const elStatus = document.getElementById(statusId);
+    const elPct = document.getElementById(pctId);
+
+    if (elH) elH.textContent = actual;
+    
+    const pct = Math.round((actual / target) * 100);
+    if (elPct) elPct.textContent = `${pct}%`;
+
+    if (elBar) {
+      elBar.style.width = `${Math.min(pct, 100)}%`;
+      elBar.className = 'progress-bar-fill';
+      if (actual === target) {
+        // perfect
+      } else if (actual < target) {
+        elBar.classList.add('warning');
+      } else {
+        elBar.classList.add('overflow');
+      }
+    }
+
+    if (elStatus) {
+      if (actual === target) {
+        elStatus.innerHTML = `<span style="color:var(--success);font-weight:600;">✓ 目標ぴったり達成</span>`;
+      } else if (actual < target) {
+        elStatus.innerHTML = `<span style="color:var(--warning);">あと ${target - actual} 時間 不足</span>`;
+      } else {
+        elStatus.innerHTML = `<span style="color:#2563eb;">+${actual - target} 時間 超過</span>`;
+      }
+    }
+  }
+
+  function renderGuidelineChips() {
+    const container = document.getElementById('guideline-chips-container');
+    if (!container) return;
+
+    const stats = calculateStats();
+    const chips = [];
+
+    // Rule 1: 1st Grade Drawing & Making both required
+    const g1Draw = stats.counts[1].draw;
+    const g1Make = stats.counts[1].make;
+    if (g1Draw > 0 && g1Make > 0) {
+      chips.push({ text: `第1学年: 描く(${g1Draw}h)・つくる(${g1Make}h) 充足`, status: 'ok' });
+    } else {
+      chips.push({ text: `第1学年: 描く活動やつくる活動のバランスが必要です`, status: 'warn' });
+    }
+
+    // Rule 2: 2nd & 3rd Grade harmony over 2 years
+    const g23Draw = stats.counts[2].draw + stats.counts[3].draw;
+    const g23Make = stats.counts[2].make + stats.counts[3].make;
+    if (g23Draw >= 10 && g23Make >= 10) {
+      chips.push({ text: `第2・3学年: 2年間調和（描く${g23Draw}h / つくる${g23Make}h）良好`, status: 'ok' });
+    } else {
+      chips.push({ text: `第2・3学年: 2年間を見通した描く・つくる活動の調和`, status: 'warn' });
+    }
+
+    // Rule 3: Appreciation coverage
+    const totalApprec = stats.counts[1].apprec + stats.counts[2].apprec + stats.counts[3].apprec;
+    if (totalApprec >= 6) {
+      chips.push({ text: `鑑賞指導: 計${totalApprec}時間（作品・美術の働き・美術文化）確保`, status: 'ok' });
+    } else if (totalApprec > 0) {
+      chips.push({ text: `鑑賞指導: 計${totalApprec}時間（各学年で適切な時数確保を推奨）`, status: 'warn' });
+    } else {
+      chips.push({ text: `鑑賞題材が未登録です`, status: 'error' });
+    }
+
+    // Rule 4: Total hours match
+    if (stats.total === 115) {
+      chips.push({ text: `3年間法定標準時数 115時間 適合`, status: 'ok' });
+    } else if (stats.total === 0) {
+      chips.push({ text: `現在データは白紙です。「＋新しい題材を追加」から計画を作成してください`, status: 'warn' });
+    } else {
+      chips.push({ text: `3年間合計: 現在${stats.total}時間（目標115時間）`, status: 'warn' });
+    }
+
+    container.innerHTML = chips.map(c => `
+      <span class="alert-chip ${c.status}" onclick="showGuidelineInfo('${escapeHtml(c.text)}')">
+        <span>${c.status === 'ok' ? '✓' : c.status === 'warn' ? '⚠️' : '✕'}</span>
+        <span>${c.text}</span>
+      </span>
+    `).join('');
+  }
+
+  function showGuidelineInfo(text) {
+    showToast(`指導要領チェック: ${text}`, 'warning');
+  }
+
+  /**
+   * Render Vertical Timeline Header & Rows
+   */
+  function renderTimeline() {
+    const headerRow = document.getElementById('timeline-header-row');
+    const rowsContainer = document.getElementById('timeline-rows-container');
+    if (!headerRow || !rowsContainer) return;
+
+    // 1. Build Header based on currentView
+    if (currentView === 'all') {
+      headerRow.innerHTML = `
+        <div class="header-cell" style="justify-content:center;">月</div>
+        <div class="header-cell">行事・評価予定</div>
+        <div class="header-cell">
+          <span class="header-grade-badge badge-g1">第1学年 (1年)</span>
+          <span style="font-size:11.5px;color:var(--on-surface-muted);">目標: 45h</span>
+        </div>
+        <div class="header-cell">
+          <span class="header-grade-badge badge-g2">第2学年 (2年)</span>
+          <span style="font-size:11.5px;color:var(--on-surface-muted);">目標: 35h</span>
+        </div>
+        <div class="header-cell">
+          <span class="header-grade-badge badge-g3">第3学年 (3年)</span>
+          <span style="font-size:11.5px;color:var(--on-surface-muted);">目標: 35h</span>
+        </div>
+      `;
+    } else if (currentView === 'g1') {
+      headerRow.innerHTML = `
+        <div class="header-cell" style="justify-content:center;">月</div>
+        <div class="header-cell">学校行事・定期テスト・評価</div>
+        <div class="header-cell">
+          <span class="header-grade-badge badge-g1">第1学年 (1年) 専科指導計画</span>
+          <span style="font-size:12px;font-weight:600;color:var(--primary);">年間目標: 45時間 【知る・育てる】</span>
+        </div>
+      `;
+    } else if (currentView === 'g23') {
+      // 2年生と3年生の計画を「左右並列」で表示
+      headerRow.innerHTML = `
+        <div class="header-cell" style="justify-content:center;">月</div>
+        <div class="header-cell">学校行事・評価予定</div>
+        <div class="header-cell">
+          <span class="header-grade-badge badge-g2">第2学年 (2年)</span>
+          <span style="font-size:11.5px;color:var(--on-surface-muted);">35時間 【深める・活かす】</span>
+        </div>
+        <div class="header-cell">
+          <span class="header-grade-badge badge-g3">第3学年 (3年)</span>
+          <span style="font-size:11.5px;color:var(--on-surface-muted);">35時間 【深める・活かす・つなげる】</span>
+        </div>
+      `;
+    }
+
+    // 2. Build 12 Monthly Rows
+    let html = '';
+    MONTHS_ORDER.forEach(month => {
+      const isQStart = (month === 4 || month === 9 || month === 1);
+      const events = planData.events[month] || [];
+
+      // Filter units for this month
+      const g1Units = planData.units.filter(u => u.grade === 1 && u.month === month);
+      const g2Units = planData.units.filter(u => u.grade === 2 && u.month === month);
+      const g3Units = planData.units.filter(u => u.grade === 3 && u.month === month);
+
+      html += `<div class="timeline-month-row" data-month="${month}">`;
+
+      // Month Label Cell
+      html += `
+        <div class="month-cell">
+          <div class="month-badge ${isQStart ? 'q-start' : ''}">${MONTH_NAMES[month]}</div>
+          <div class="month-subtext">${getMonthSubtitle(month)}</div>
+        </div>
+      `;
+
+      // Events Cell
+      html += `
+        <div class="events-cell">
+          <div class="events-header">
+            <span>予定・行事</span>
+            <button type="button" class="btn-add-event-mini" onclick="openAddEventModal(${month})" title="この月に行事・評価を追加">＋追加</button>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:3px;">
+            ${events.map((ev, idx) => `
+              <div class="event-chip ${ev.type || 'default'}" onclick="openEditEventModal(${month}, ${idx})">
+                <span>${escapeHtml(ev.name)}</span>
+                <i data-lucide="edit-2" style="width:10px;height:10px;opacity:0.6;"></i>
+              </div>
+            `).join('')}
+            ${events.length === 0 ? '<span style="font-size:11px;color:var(--on-surface-muted);font-style:italic;">行事予定なし</span>' : ''}
+          </div>
+        </div>
+      `;
+
+      // Grade Unit Cells depending on view
+      if (currentView === 'all') {
+        html += renderGradeDropCell(1, month, g1Units);
+        html += renderGradeDropCell(2, month, g2Units);
+        html += renderGradeDropCell(3, month, g3Units);
+      } else if (currentView === 'g1') {
+        html += renderGradeDropCell(1, month, g1Units);
+      } else if (currentView === 'g23') {
+        html += renderGradeDropCell(2, month, g2Units);
+        html += renderGradeDropCell(3, month, g3Units);
+      }
+
+      html += `</div>`;
+    });
+
+    rowsContainer.innerHTML = html;
+  }
+
+  function getMonthSubtitle(month) {
+    if (month === 4) return '前期始業';
+    if (month === 7) return '夏季前';
+    if (month === 8) return '夏期休業';
+    if (month === 9) return '秋期開始';
+    if (month === 12) return '冬季前';
+    if (month === 3) return '修了・卒業';
+    return '';
+  }
+
+  function renderGradeDropCell(grade, month, units) {
+    let out = `
+      <div class="grade-cell" 
+           data-grade="${grade}" 
+           data-month="${month}"
+           ondragover="handleDragOver(event)" 
+           ondragleave="handleDragLeave(event)" 
+           ondrop="handleDrop(event, ${grade}, ${month})">
+    `;
+
+    units.forEach(u => {
+      out += renderUnitCard(u);
+    });
+
+    out += `
+      <button type="button" class="btn-cell-add" onclick="openAddUnitModal(${grade}, ${month})">
+        <i data-lucide="plus" style="width:12px;height:12px;"></i>
+        <span>題材を追加</span>
+      </button>
+    `;
+
+    out += `</div>`;
+    return out;
+  }
+
+  function renderUnitCard(u) {
+    const cat = CATEGORY_MAP[u.category] || { label: u.category, tag: '美術' };
+    const actClass = u.activity === 'draw' ? 'tag-draw' : u.activity === 'make' ? 'tag-make' : 'tag-apprec';
+    const actName = u.activity === 'draw' ? '描く' : u.activity === 'make' ? 'つくる' : '鑑賞';
+
+    return `
+      <div class="unit-card" 
+           id="card-${u.id}" 
+           draggable="true" 
+           ondragstart="handleDragStart(event, '${u.id}')"
+           onclick="openEditUnitModal('${u.id}')">
+        <div class="unit-card-header">
+          <span class="unit-title">${escapeHtml(u.title)}</span>
+          <span class="unit-hours-badge">${u.hours}時間</span>
+        </div>
+        <div class="unit-meta-row">
+          <span class="unit-tag ${actClass}">${actName}</span>
+          <span class="unit-tag tag-code">${cat.label}</span>
+          ${u.themeTag ? `<span class="unit-tag tag-theme">${escapeHtml(u.themeTag)}</span>` : ''}
+          ${u.common ? `<span class="unit-tag tag-code" title="〔共通事項〕">共:${u.common}</span>` : ''}
+        </div>
+        ${u.desc ? `<div class="unit-desc">${escapeHtml(u.desc)}</div>` : ''}
+        <div class="unit-actions" onclick="event.stopPropagation()">
+          <button type="button" class="unit-btn-mini" onclick="duplicateUnit('${u.id}')" title="題材を複製">
+            <i data-lucide="copy" style="width:11px;height:11px;"></i> 複製
+          </button>
+          <button type="button" class="unit-btn-mini" onclick="openEditUnitModal('${u.id}')" title="編集">
+            <i data-lucide="edit" style="width:11px;height:11px;"></i> 編集
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  /**
+   * Drag and Drop Handlers
+   */
+  function handleDragStart(e, unitId) {
+    draggedUnitId = unitId;
+    e.dataTransfer.setData('text/plain', unitId);
+    e.dataTransfer.effectAllowed = 'move';
+  }
+
+  function handleDragOver(e) {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    const cell = e.currentTarget;
+    if (cell && !cell.classList.contains('drag-over')) {
+      cell.classList.add('drag-over');
+    }
+  }
+
+  function handleDragLeave(e) {
+    const cell = e.currentTarget;
+    if (cell) {
+      cell.classList.remove('drag-over');
+    }
+  }
+
+  function handleDrop(e, targetGrade, targetMonth) {
+    e.preventDefault();
+    const cell = e.currentTarget;
+    if (cell) cell.classList.remove('drag-over');
+
+    const unitId = e.dataTransfer.getData('text/plain') || draggedUnitId;
+    if (!unitId) return;
+
+    const unit = planData.units.find(u => u.id === unitId);
+    if (!unit) return;
+
+    // Check if changed
+    if (unit.grade === targetGrade && unit.month === targetMonth) return;
+
+    unit.grade = Number(targetGrade);
+    unit.month = Number(targetMonth);
+
+    pushHistoryState(`題材移動: ${unit.title} → 第${targetGrade}学年 ${targetMonth}月`);
+    renderAll();
+    showToast(`「${unit.title}」を 第${targetGrade}学年 ${targetMonth}月に移動しました`);
+  }
+
+  /**
+   * Unit Add / Edit Modal Logic
+   */
+  function openAddUnitModal(defaultGrade, defaultMonth) {
+    const modal = document.getElementById('unit-modal');
+    const form = document.getElementById('unit-form');
+    const titleEl = document.getElementById('unit-modal-title');
+    const deleteBtn = document.getElementById('btn-modal-delete');
+
+    if (!modal || !form) return;
+
+    form.reset();
+    document.getElementById('edit-unit-id').value = '';
+    
+    if (titleEl) {
+      titleEl.innerHTML = `<i data-lucide="plus-circle" style="width:18px;height:18px;color:var(--primary);"></i> <span>新規題材の追加</span>`;
+    }
+    if (deleteBtn) deleteBtn.style.display = 'none';
+
+    if (defaultGrade) {
+      document.getElementById('modal-unit-grade').value = String(defaultGrade);
+    }
+    if (defaultMonth) {
+      document.getElementById('modal-unit-month').value = String(defaultMonth);
+    }
+
+    modal.classList.add('open');
+    if (window.lucide) window.lucide.createIcons();
+    document.getElementById('modal-unit-name').focus();
+  }
+
+  function openEditUnitModal(unitId) {
+    const unit = planData.units.find(u => u.id === unitId);
+    if (!unit) return;
+
+    const modal = document.getElementById('unit-modal');
+    const titleEl = document.getElementById('unit-modal-title');
+    const deleteBtn = document.getElementById('btn-modal-delete');
+
+    if (!modal) return;
+
+    document.getElementById('edit-unit-id').value = unit.id;
+    document.getElementById('modal-unit-name').value = unit.title || '';
+    document.getElementById('modal-unit-grade').value = String(unit.grade);
+    document.getElementById('modal-unit-month').value = String(unit.month);
+    document.getElementById('modal-unit-hours').value = unit.hours;
+    document.getElementById('modal-unit-category').value = unit.category;
+    document.getElementById('modal-unit-activity').value = unit.activity;
+    document.getElementById('modal-unit-common').value = unit.common || 'アイ';
+    document.getElementById('modal-unit-theme-tag').value = unit.themeTag || '';
+    document.getElementById('modal-unit-desc').value = unit.desc || '';
+    document.getElementById('modal-unit-materials').value = unit.materials || '';
+
+    if (titleEl) {
+      titleEl.innerHTML = `<i data-lucide="edit-3" style="width:18px;height:18px;color:var(--primary);"></i> <span>題材の編集</span>`;
+    }
+    if (deleteBtn) deleteBtn.style.display = 'inline-flex';
+
+    modal.classList.add('open');
+    if (window.lucide) window.lucide.createIcons();
+  }
+
+  function closeUnitModal() {
+    const modal = document.getElementById('unit-modal');
+    if (modal) modal.classList.remove('open');
+  }
+
+  function handleSaveUnit(e) {
+    e.preventDefault();
+    const editId = document.getElementById('edit-unit-id').value;
+    const title = document.getElementById('modal-unit-name').value.trim();
+    const grade = Number(document.getElementById('modal-unit-grade').value);
+    const month = Number(document.getElementById('modal-unit-month').value);
+    const hours = Number(document.getElementById('modal-unit-hours').value) || 1;
+    const category = document.getElementById('modal-unit-category').value;
+    const activity = document.getElementById('modal-unit-activity').value;
+    const common = document.getElementById('modal-unit-common').value;
+    const themeTag = document.getElementById('modal-unit-theme-tag').value.trim();
+    const desc = document.getElementById('modal-unit-desc').value.trim();
+    const materials = document.getElementById('modal-unit-materials').value.trim();
+
+    if (!title) {
+      alert('題材名を入力してください');
+      return;
+    }
+
+    if (editId) {
+      // Edit existing
+      const unit = planData.units.find(u => u.id === editId);
+      if (unit) {
+        unit.title = title;
+        unit.grade = grade;
+        unit.month = month;
+        unit.hours = hours;
+        unit.category = category;
+        unit.activity = activity;
+        unit.common = common;
+        unit.themeTag = themeTag;
+        unit.desc = desc;
+        unit.materials = materials;
+        pushHistoryState(`題材更新: ${title}`);
+        showToast(`題材「${title}」を更新しました`);
+      }
+    } else {
+      // Add new
+      const newUnit = {
+        id: 'u_' + Date.now() + '_' + Math.floor(Math.random()*1000),
+        title,
+        grade,
+        month,
+        hours,
+        category,
+        activity,
+        common,
+        themeTag,
+        desc,
+        materials
+      };
+      planData.units.push(newUnit);
+      pushHistoryState(`題材追加: ${title}`);
+      showToast(`新しい題材「${title}」を追加しました`);
+    }
+
+    closeUnitModal();
+    renderAll();
+  }
+
+  function handleDeleteUnitInModal() {
+    const editId = document.getElementById('edit-unit-id').value;
+    if (!editId) return;
+
+    const unit = planData.units.find(u => u.id === editId);
+    if (!unit) return;
+
+    if (confirm(`題材「${unit.title}」を削除しますか？`)) {
+      planData.units = planData.units.filter(u => u.id !== editId);
+      pushHistoryState(`題材削除: ${unit.title}`);
+      closeUnitModal();
+      renderAll();
+      showToast(`題材「${unit.title}」を削除しました`);
+    }
+  }
+
+  function duplicateUnit(unitId) {
+    const unit = planData.units.find(u => u.id === unitId);
+    if (!unit) return;
+
+    const dup = JSON.parse(JSON.stringify(unit));
+    dup.id = 'u_' + Date.now() + '_' + Math.floor(Math.random()*1000);
+    dup.title = unit.title + ' (コピー)';
+
+    planData.units.push(dup);
+    pushHistoryState(`題材複製: ${dup.title}`);
+    renderAll();
+    showToast(`「${dup.title}」を複製しました`);
+  }
+
+  function handleGradeChangedInModal() {
+    // Helper to dynamically adjust activity hints if needed
+  }
+
+  /**
+   * Event Add / Edit Modal Logic
+   */
+  function openAddEventModal(month) {
+    const modal = document.getElementById('event-modal');
+    const form = document.getElementById('event-form');
+    const delBtn = document.getElementById('btn-event-delete');
+    const titleEl = document.getElementById('event-modal-title');
+
+    if (!modal || !form) return;
+    form.reset();
+
+    document.getElementById('event-modal-month').value = String(month);
+    document.getElementById('event-modal-index').value = '-1';
+    if (delBtn) delBtn.style.display = 'none';
+    if (titleEl) titleEl.textContent = `${MONTH_NAMES[month]} の行事・評価予定の追加`;
+
+    modal.classList.add('open');
+    document.getElementById('event-modal-name').focus();
+  }
+
+  function openEditEventModal(month, index) {
+    const events = planData.events[month] || [];
+    const ev = events[index];
+    if (!ev) return;
+
+    const modal = document.getElementById('event-modal');
+    const delBtn = document.getElementById('btn-event-delete');
+    const titleEl = document.getElementById('event-modal-title');
+
+    if (!modal) return;
+
+    document.getElementById('event-modal-month').value = String(month);
+    document.getElementById('event-modal-index').value = String(index);
+    document.getElementById('event-modal-name').value = ev.name;
+    document.getElementById('event-modal-type').value = ev.type || 'default';
+
+    if (delBtn) delBtn.style.display = 'inline-flex';
+    if (titleEl) titleEl.textContent = `${MONTH_NAMES[month]} の行事・評価予定の編集`;
+
+    modal.classList.add('open');
+  }
+
+  function closeEventModal() {
+    const modal = document.getElementById('event-modal');
+    if (modal) modal.classList.remove('open');
+  }
+
+  function handleSaveEvent(e) {
+    e.preventDefault();
+    const month = Number(document.getElementById('event-modal-month').value);
+    const index = Number(document.getElementById('event-modal-index').value);
+    const name = document.getElementById('event-modal-name').value.trim();
+    const type = document.getElementById('event-modal-type').value;
+
+    if (!name) return;
+
+    if (!planData.events[month]) {
+      planData.events[month] = [];
+    }
+
+    if (index >= 0 && planData.events[month][index]) {
+      planData.events[month][index] = { name, type };
+      pushHistoryState(`行事更新: ${name}`);
+    } else {
+      planData.events[month].push({ name, type });
+      pushHistoryState(`行事追加: ${name}`);
+    }
+
+    closeEventModal();
+    renderTimeline();
+    showToast(`${MONTH_NAMES[month]}の行事予定を保存しました`);
+  }
+
+  function handleDeleteEventInModal() {
+    const month = Number(document.getElementById('event-modal-month').value);
+    const index = Number(document.getElementById('event-modal-index').value);
+
+    if (index >= 0 && planData.events[month] && planData.events[month][index]) {
+      const removed = planData.events[month].splice(index, 1);
+      pushHistoryState(`行事削除: ${removed[0]?.name || ''}`);
+      closeEventModal();
+      renderTimeline();
+      showToast('行事予定を削除しました');
+    }
+  }
+
+  /**
+   * School Meta & Slogans Modal Logic
+   */
+  function editSchoolMeta() {
+    const modal = document.getElementById('meta-modal');
+    if (!modal) return;
+
+    document.getElementById('modal-school-name').value = planData.schoolName;
+    document.getElementById('modal-school-year').value = planData.schoolYear;
+    document.getElementById('modal-plan-title').value = planData.planTitle;
+
+    modal.classList.add('open');
+  }
+
+  function closeMetaModal() {
+    const modal = document.getElementById('meta-modal');
+    if (modal) modal.classList.remove('open');
+  }
+
+  function handleSaveMeta(e) {
+    e.preventDefault();
+    planData.schoolName = document.getElementById('modal-school-name').value.trim();
+    planData.schoolYear = document.getElementById('modal-school-year').value.trim();
+    planData.planTitle = document.getElementById('modal-plan-title').value.trim();
+
+    pushHistoryState('学校名・タイトル変更');
+    closeMetaModal();
+    renderHeaderInfo();
+    showToast('学校基本情報を保存しました');
+  }
+
+  function editGradeTheme(grade) {
+    const current = planData.gradeThemes[grade] || '';
+    const updated = prompt(`第${grade}学年の教育重点・スローガンを入力してください:`, current);
+    if (updated !== null && updated.trim() !== '') {
+      planData.gradeThemes[grade] = updated.trim();
+      pushHistoryState(`第${grade}学年スローガン変更`);
+      renderHeaderInfo();
+      showToast(`第${grade}学年の重点を更新しました`);
+    }
+  }
+
+  /**
+   * CSV Export with UTF-8 BOM for Microsoft Excel
+   */
+  function exportToCsv() {
+    const headers = ['学年', '月', '題材名', '配当時数', '領域分類', '指導要領コード', '活動形態', '共通事項', '学習キーワード', '題材の目標・内容', '主な材料・用具'];
+    const rows = [headers];
+
+    // Sort by Grade then by Month
+    const sorted = [...planData.units].sort((a, b) => {
+      if (a.grade !== b.grade) return a.grade - b.grade;
+      return MONTHS_ORDER.indexOf(a.month) - MONTHS_ORDER.indexOf(b.month);
+    });
+
+    sorted.forEach(u => {
+      const cat = CATEGORY_MAP[u.category] || { label: u.category };
+      const act = u.activity === 'draw' ? '描く活動' : u.activity === 'make' ? 'つくる活動' : '鑑賞専科';
+      rows.push([
+        `第${u.grade}学年`,
+        MONTH_NAMES[u.month] || `${u.month}月`,
+        u.title,
+        u.hours,
+        cat.label,
+        u.category,
+        act,
+        u.common || 'アイ',
+        u.themeTag || '',
+        u.desc || '',
+        u.materials || ''
+      ]);
+    });
+
+    // Generate CSV content with proper escaping
+    const csvContent = rows.map(r => 
+      r.map(cell => {
+        const str = String(cell ?? '');
+        return `"${str.replace(/"/g, '""')}"`;
+      }).join(',')
+    ).join('\r\n');
+
+    // Add UTF-8 BOM (\uFEFF) to guarantee Excel opens in Japanese without mojibake
+    const bomCsv = '\uFEFF' + csvContent;
+    const filename = `${planData.schoolName}_美術科3年間指導計画_${new Date().toISOString().slice(0, 10)}.csv`;
+
+    if (window.notebookAppApi && typeof window.notebookAppApi.triggerFileDownload === 'function') {
+      window.notebookAppApi.triggerFileDownload({
+        content: bomCsv,
+        contentType: 'text/csv;charset=utf-8',
+        encoding: 'utf-8',
+        filename: filename
+      });
+    } else {
+      const blob = new Blob([bomCsv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', filename);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+
+    showToast('Excel対応CSVファイルを書き出しました (UTF-8 BOM付き)');
+  }
+
+  /**
+   * Data Import (CSV or JSON)
+   */
+  function triggerFileInput() {
+    const input = document.getElementById('file-importer');
+    if (input) {
+      input.value = '';
+      input.click();
+    }
+  }
+
+  function handleFileSelected(e) {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+      const text = evt.target.result;
+      if (!text) return;
+
+      try {
+        if (file.name.endsWith('.json')) {
+          parseJsonImport(text);
+        } else {
+          parseCsvImport(text);
+        }
+      } catch (err) {
+        alert('ファイルの読み込みに失敗しました。形式が正しいか確認してください。\n' + err.message);
+      }
+    };
+    reader.readAsText(file, 'utf-8');
+  }
+
+  function parseJsonImport(jsonString) {
+    const data = JSON.parse(jsonString);
+    if (!data.units || !Array.isArray(data.units)) {
+      throw new Error('JSON内に有効な units 配列が見つかりません');
+    }
+
+    planData.units = data.units;
+    if (data.events) planData.events = data.events;
+    if (data.schoolName) planData.schoolName = data.schoolName;
+    if (data.schoolYear) planData.schoolYear = data.schoolYear;
+    if (data.planTitle) planData.planTitle = data.planTitle;
+    if (data.gradeThemes) planData.gradeThemes = data.gradeThemes;
+
+    pushHistoryState('JSONデータインポート');
+    renderAll();
+    showToast(`JSONデータを読み込みました (${data.units.length} 件の題材)`);
+  }
+
+  function parseCsvImport(csvString) {
+    // Strip BOM if present
+    const cleanCsv = csvString.replace(/^\uFEFF/, '');
+    const lines = cleanCsv.split(/\r?\n/).filter(l => l.trim().length > 0);
+    if (lines.length < 2) {
+      throw new Error('CSVデータにヘッダー行およびデータ行が含まれていません');
+    }
+
+    const parseCsvRow = (line) => {
+      const res = [];
+      let inQuote = false;
+      let cur = '';
+      for (let i = 0; i < line.length; i++) {
+        const c = line[i];
+        if (c === '"') {
+          if (inQuote && line[i+1] === '"') {
+            cur += '"';
+            i++;
+          } else {
+            inQuote = !inQuote;
+          }
+        } else if (c === ',' && !inQuote) {
+          res.push(cur.trim());
+          cur = '';
+        } else {
+          cur += c;
+        }
+      }
+      res.push(cur.trim());
+      return res;
+    };
+
+    const header = parseCsvRow(lines[0]);
+    const importedUnits = [];
+
+    for (let i = 1; i < lines.length; i++) {
+      const row = parseCsvRow(lines[i]);
+      if (row.length < 3) continue;
+
+      // Extract Grade
+      let grade = 1;
+      const gStr = row[0] || '';
+      if (gStr.includes('2')) grade = 2;
+      else if (gStr.includes('3')) grade = 3;
+
+      // Extract Month
+      let month = 4;
+      const mStr = row[1] || '';
+      const mMatch = mStr.match(/(\d+)/);
+      if (mMatch) month = Number(mMatch[1]);
+      if (!MONTHS_ORDER.includes(month)) month = 4;
+
+      const title = row[2] || `題材 ${i}`;
+      const hours = Number(row[3]) || 8;
+      const categoryCode = row[5] || 'A_EXPR_1_A';
+      
+      let activity = 'draw';
+      const actStr = row[6] || '';
+      if (actStr.includes('つくる')) activity = 'make';
+      else if (actStr.includes('鑑賞')) activity = 'appreciation';
+
+      importedUnits.push({
+        id: 'imp_' + Date.now() + '_' + i,
+        grade,
+        month,
+        title,
+        hours,
+        category: categoryCode in CATEGORY_MAP ? categoryCode : 'A_EXPR_1_A',
+        activity,
+        common: row[7] || 'アイ',
+        themeTag: row[8] || '',
+        desc: row[9] || '',
+        materials: row[10] || ''
+      });
+    }
+
+    if (importedUnits.length === 0) {
+      throw new Error('CSVから有効な題材データを解析できませんでした');
+    }
+
+    planData.units = importedUnits;
+    pushHistoryState(`CSVデータインポート (${importedUnits.length}件)`);
+    renderAll();
+    showToast(`CSVから ${importedUnits.length} 件の題材を取り込みました`);
+  }
+
+  /**
+   * Utilities
+   */
+  function escapeHtml(str) {
+    if (str == null) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function showToast(message, type = 'success') {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.innerHTML = `
+      <i data-lucide="${type === 'success' ? 'check-circle' : 'alert-triangle'}" style="width:16px;height:16px;"></i>
+      <span>${escapeHtml(message)}</span>
+    `;
+
+    container.appendChild(toast);
+    if (window.lucide) window.lucide.createIcons();
+
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(8px)';
+      toast.style.transition = 'opacity 0.25s, transform 0.25s';
+      setTimeout(() => {
+        if (toast.parentNode) toast.parentNode.removeChild(toast);
+      }, 250);
+    }, 3500);
+  }
+</script>
+
+</body>
+</html>
